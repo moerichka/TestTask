@@ -1,29 +1,57 @@
 import "/styles/index.scss";
-import { sendRequest } from "/scripts/request";
-import { Card } from "/scripts/Card";
+import { sendRequest } from "/scripts/request"; // module for making a xhr request
+import { Card } from "/scripts/Card"; // module for creating a cards with examples of works
 
-
-let cards = "";
+let cards = ""; // we will put here out html with data from JSON
+let titles = []; // Titles for filter
+let i = 0; // iterater
 const $field = document.querySelector(".example-field");
-const $inputF = document.querySelector('.filter__input');
+const $inputF = document.querySelector(".filter__input");
 
-sendRequest()
+sendRequest() //send request
   .then((data) => {
-    createElements(data);
+    createElements(data); //after promise represent our data to site
   })
   .catch((err) => {
     console.log(`%c${err}`, "color: red");
   });
 
-let createElements = (data) => {
-    for (const key in data) {
-        const element = data[key];
-        let card = new Card(element);
-        cards += card.strCard;
-      }
-      $field.innerHTML = cards;
+let createElements = (data) => { 
+  for (const key in data) {
+    const element = data[key];
+    let card = new Card(element);
+    cards += card.strCard;
+    titles[i] = element?.title;
+    i++;
+  }
+  i = 0;
+  $field.innerHTML = cards;
 };
 
-$inputF.addEventListener('change', () => {
-    console.log(this.value);
+$inputF.addEventListener("change", (e) => {
+  for (let i = 0; i < titles.length; i++) {
+    if (e.target.value.length > 2) {
+      if (!titles[i].includes(e.target.value)) {
+        document.getElementById(i + 1).classList.add("hide");
+      }
+    } else {
+      document.getElementById(i + 1).classList.remove("hide");
+    }
+  }
+});
+
+$field.addEventListener("click", (e) => {
+  let id = 0;
+
+  for (let i = 0; i < 3; i++) {
+    if (e.path[i].id) {
+      id = e.path[i].id;
+      console.log("id: ", id);
+      break;
+    }
+  }
+
+  if (e.target.className.toString().includes("card")) {
+    window.location.href = `${window.location.href}details/${id}`;
+  }
 });

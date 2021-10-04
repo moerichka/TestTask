@@ -52,6 +52,9 @@
       box-sizing: border-box;
       border-radius: 25px;
       color: variables.$text;
+      &::placeholder {
+        color: variables.$input;
+      }
     }
   }
   .example-field {
@@ -65,28 +68,44 @@
       margin-bottom: 38px;
       background-color: variables.$card;
       border: 1px solid variables.$border;
+      cursor: pointer;
       &:hover {
         background-color: variables.$Hcard;
         border: 1px solid variables.$Hborder;
       }
     }
-    .card-blue {
-    }
-    .card-orange {
-    }
+
     @for $i from 1 to 13 {
       .img#{$i} {
         background: url("../assets/img/#{$i}.jpg");
       }
     }
     .card__img {
-      width: 378px;
+      width: 377px;
       height: 227px;
-      max-width: 378px;
+      max-width: 376px;
       max-height: 227px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
+      display: flex;
+      justify-content: end;
+      .card-blue {
+        padding: 8px 10px 5px 11px;
+        position: relative;
+        color: #fff;
+        font-size: 12px;
+        background-color: variables.$blue;
+        margin-top: auto;
+      }
+      .card-orange {
+        padding: 8px 10px 5px 11px;
+        position: relative;
+        color: #fff;
+        font-size: 12px;
+        background-color: variables.$orange;
+        margin-top: auto;
+      }
     }
     .card__title {
       padding-top: 24px;
@@ -145,7 +164,7 @@
   }
 }
 
-.hide{
+.hide {
   position: absolute;
   display: none;
 }

@@ -1,3 +1,6 @@
-@use "variables";
 @use "fonts";
 @use "mixins" as m;
+
+$link: hsla(0, 0%, 21%, 1);
+$title: hsla(104, 49%, 35%, 1);
+$text: hsla(0, 0%, 21%, 0.7);

@@ -43,6 +43,7 @@ $inputF.addEventListener("input", (e) => {
     }
     if (i == titles.length - 1) {
       checkResult(chekcer);
+      console.log('chekcer: ', chekcer);
     }
   }
 });
@@ -64,10 +65,10 @@ $field.addEventListener("click", (e) => {
 });
 
 let checkResult = (chekcer) => {
-  if (chekcer == 0) {
-    showHideResults(true);
-  } else {
+  if (chekcer == 12) {
     showHideResults(false);
+  } else {
+    showHideResults(true);
   }
 };
 

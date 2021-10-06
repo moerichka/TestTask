@@ -16,7 +16,7 @@ sendRequest() //send request
     console.log(`%c${err}`, "color: red");
   });
 
-let createElements = (data) => { 
+let createElements = (data) => {
   for (const key in data) {
     const element = data[key];
     let card = new Card(element);
@@ -28,14 +28,21 @@ let createElements = (data) => {
   $field.innerHTML = cards;
 };
 
-$inputF.addEventListener("change", (e) => {
+$inputF.addEventListener("input", (e) => {
+  let input = e.target.value.toLowerCase();
+  let chekcer = 0;
+
   for (let i = 0; i < titles.length; i++) {
-    if (e.target.value.length > 2) {
-      if (!titles[i].includes(e.target.value)) {
+    if (input.length > 2) {
+      if (!titles[i].toLowerCase().includes(input)) {
         document.getElementById(i + 1).classList.add("hide");
+        chekcer++;
       }
     } else {
       document.getElementById(i + 1).classList.remove("hide");
+    }
+    if (i == titles.length - 1) {
+      checkResult(chekcer);
     }
   }
 });
@@ -55,3 +62,19 @@ $field.addEventListener("click", (e) => {
     window.location.href = `${window.location.href}details/${id}`;
   }
 });
+
+let checkResult = (chekcer) => {
+  if (chekcer == 0) {
+    showHideResults(true);
+  } else {
+    showHideResults(false);
+  }
+};
+
+let showHideResults = (flag) => {
+  if (flag) {
+    document.querySelector(".noResults").classList.add("hide");
+  } else {
+    document.querySelector(".noResults").classList.remove("hide");
+  }
+};
